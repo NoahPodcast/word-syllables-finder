@@ -1,139 +1,97 @@
-# README.md
+# README word-syllables-finder
 
 ## Introduction
 
-This script reads a file containing words and creates a custom dictionary. It allows users to search for words containing specific syllables with a length constraint. The script supports English and French dictionaries by default and can be customized for other languages.
+This Python script is designed to read a dictionary file containing words and search for words that contain a specified sequence of syllables, subject to a length constraint. The script can be configured to use different dictionaries based on language selection.
 
-## Prerequisites
+## Script Overview
 
-- Python 3.x installed on your system.
-- A text file containing the words for the dictionary.
+1. **Read Dictionary File**: Reads words from a dictionary file and creates a mapping of words to the file path.
+2. **Language Selection**: Determines which dictionary file to use based on the selected language.
+3. **Syllable Search**: Prompts the user to enter syllables and searches for words in the dictionary that contain those syllables and meet a length constraint.
+4. **Display Results**: Outputs the found words and their corresponding file paths.
 
-## Installation
+## Parameters
 
-1. Clone the repository to your local machine:
+### `file_path`
 
-    ```sh
-    git clone https://github.com/yourusername/word-syllables-finder.git
+- **Description**: Path to the dictionary file.
+- **Type**: String
+- **Usage**: Set based on the selected language.
+
+### `language`
+
+- **Description**: Specifies the language for the dictionary.
+- **Type**: String
+- **Options**:
+  - `"en"`: English dictionary file
+  - `"fr"`: French dictionary file
+  - `"other"`: A custom dictionary file for other languages
+- **Default**: `"en"`
+
+### `syllables`
+
+- **Description**: The sequence of syllables to search for in the dictionary.
+- **Type**: String
+
+## How to Use
+
+1. **Select the Language**:
+   - Set the `language` variable to `"en"` for English, `"fr"` for French, or `"other"` for a custom language.
+
+2. **Specify the File Path**:
+   - For `"en"` or `"fr"`, the file paths are automatically set to `"en_dictionary.txt"` or `"fr_dictionary.txt"`, respectively.
+   - For `"other"`, set the `file_path` variable to the appropriate dictionary file path.
+
+3. **Run the Script**:
+   - The script will read the specified dictionary file and create a word dictionary.
+
+4. **Enter Syllables**:
+   - When prompted, input the syllables you want to search for.
+
+5. **View Results**:
+   - The script will display words that contain the specified syllables and are no longer than 8 characters. It will stop searching after finding 10 words.
+
+## Step-by-Step Explanation
+
+1. **Reading the Dictionary File**:
+   ```python
+   def read_dictionary(file_path):
+       word_dictionary = {}
+       with open(file_path, 'r') as file:
+           for line in file:
+               word = line.strip()  # Remove spaces and newlines
+               word_dictionary[word] = file_path
+       return word_dictionary
     ```
+    - This function reads each line from the file specified by `file_path`, removes any extra spaces or newline characters, and adds each word to the `word_dictionary` with the file path as the value.
 
-2. Navigate to the project directory:
-
-    ```sh
-    cd word-syllables-finder
-    ```
-
-## Usage
-
-### For Linux Users
-
-1. Place your dictionary file in the appropriate location:
-    - For English, place your file at `/home/your-username/word-syllables-finder/en_dictionary.txt`.
-    - For French, place your file at `/home/your-username/word-syllables-finder/fr_dictionary.txt`.
-    - For other languages, update the script with the path to your custom dictionary file.
-
-2. Run the script:
-
-    ```sh
-    python script_name.py
-    ```
-
-    Replace `script_name.py` with the name of your script file.
-
-3. Enter the syllables when prompted:
-
-    ```sh
-    Enter syllables: your_syllables
-    ```
-
-### For Windows Users
-
-1. Place your dictionary file in the appropriate location:
-    - For English, place your file at `C:\\Users\\your-username\\word-syllables-finder\\en_dictionary.txt`.
-    - For French, place your file at `C:\\Users\\your-username\\word-syllables-finder\\fr_dictionary.txt`.
-    - For other languages, update the script with the path to your custom dictionary file.
-
-2. Open Command Prompt (cmd) and navigate to the project directory:
-
-    ```cmd
-    cd C:\Users\yourusername\word-syllables-finder
-    ```
-
-3. Run the script:
-
-    ```cmd
-    python script_name.py
-    ```
-
-    Replace `word-syllables-finder.py` with the name of your script file.
-
-4. Enter the syllables when prompted:
-
-    ```cmd
-    Enter syllables: your_syllables
-    ```
-
-## Script Explanation
-
-Here's a breakdown of what the script does:
-
-1. **Function to read the file and create the word dictionary:**
-
-    ```python
-    def read_dictionary(file_path):
-        word_dictionary = {}
-        with open(file_path, 'r') as file:
-            for line in file:
-                word = line.strip()  # Remove spaces and newlines
-                word_dictionary[word] = file_path
-        return word_dictionary
-    ```
-
-    This function reads the specified file line by line, strips any spaces and newlines, and adds the words to a dictionary with the word as the key and the file path as the value.
-
-2. **Language selection:**
-
+2. **Language Selection**:
     ```python
     language = "en"  # "en" for English, "fr" for French, "other" for other languages
-    ```
 
-    This variable sets the language for the dictionary. You can change it to "fr" for French or "other" for other languages.
-
-3. **Path of the file containing the words:**
-
-    ```python
     if language == "en": 
-        file_path = "/home/your-username/word-syllables-finder/en_dictionary.txt" 
+        file_path = "en_dictionary.txt"  # English dictionary file path
     elif language == "fr":
-        file_path = "/home/your-username/word-syllables-finder/fr_dictionary.txt"
+        file_path = "fr_dictionary.txt"  # French dictionary file path
     elif language == "other":
-        file_path = ""  # Enter the path of the file containing the words
+        file_path = ""  # Enter the name file of the dictionary file of the other language
     else:
         print("Invalid language selection.")
         exit()
     ```
+    - This block sets the `file_path` based on the `language` variable. It defaults to English if no other valid language is selected.
 
-    This block sets the file path based on the selected language. Update the path if you choose "other".
-
-4. **Read the file and create the word dictionary:**
-
+3. **Creating the Word Dictionary**:
     ```python
     word_dictionary = read_dictionary(file_path)
     ```
+    - Calls the `read_dictionary` function to populate `word_dictionary` with words from the specified file.
 
-    This line calls the `read_dictionary` function to create the word dictionary from the specified file.
-
-5. **Ask the user to enter syllables:**
-
+4. **User Input and Word Search**:
     ```python
     syllables = input("Enter syllables: ")
-    ```
 
-    This line prompts the user to enter the syllables they want to search for.
-
-6. **Search for matching words with length constraint:**
-
-    ```python
     found_words = []
     for word in word_dictionary:
         if syllables in word and len(word) <= 8:
@@ -141,31 +99,34 @@ Here's a breakdown of what the script does:
             if len(found_words) == 10:
                 break
     ```
+    - Prompts the user to input syllables and searches for words containing those syllables that are no longer than 8 characters. The search stops after finding 10 words.
 
-    This block searches for words in the dictionary that contain the entered syllables and are 8 characters or less in length. It stops after finding 10 matching words.
-
-7. **Display the results:**
-
+5. **Displaying Results**:
     ```python
     if found_words:
-        print("Found words:")
-        for word in found_words:
-            print(f"- {word} (File path: {word_dictionary[word]})")
+    print("Found words:")
+    for word in found_words:
+        print(f"- {word} (File path: {word_dictionary[word]})")
     else:
         print("No matching word found.")
     ```
+    - Displays the words found and their file paths. If no words are found, it prints a corresponding message.
 
-    This block displays the found words and their file paths. If no words are found, it prints a message saying so.
+## Example Usage
+    
+1. Set the language to `"en"` and ensure `en_dictionary.txt` is in the same directory.
+    
+2. Run the script.
+    
+3. When prompted, enter the desired syllables, e.g., `"cat"`
+    
+4. Review the output for matching words.
 
-## Customization
+## Notes
+- Ensure that the dictionary files are properly formatted, with one word per line.
 
-- To change the length constraint, modify the number in `len(word) <= 8` to your desired length.
-- To change the maximum number of words to find, modify the number in `if len(found_words) == 10`.
+- Adjust the length constraint or number of results by modifying the script as needed.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-## Contributing
-
-Feel free to open issues or submit pull requests if you have suggestions for improvements or new features.
+```vbnet
+This README file explains each aspect of the script, from how to configure it to how it operates step by step. It provides a clear guide for users to understand and utilize the script effectively.
+```

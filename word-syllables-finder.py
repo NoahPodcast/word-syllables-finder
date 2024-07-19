@@ -12,11 +12,11 @@ language = "en"  # "en" for English, "fr" for French, "other" for other language
 
 # Path of the file containing the words
 if language == "en": 
-    file_path = "/home/naubert/word-syllables-finder/en_dictionary.txt" # Enter the path of the file containing the English words for linux users, for Windows users, use the path like "C:\\Users\\naubert\\word-syllables-finder\\en_dictionary.txt"
+    file_path = "en_dictionary.txt" # English dictionary file path
 elif language == "fr":
-    file_path = "/home/naubert/word-syllables-finder/fr_dictionary.txt"
+    file_path = "fr_dictionary.txt" # French dictionary file path
 elif language == "other":
-    file_path = ""  # Enter the path of the file containing the words
+    file_path = ""  # Enter the name file of the dictionary file of the other language
 else:
     print("Invalid language selection.")
     exit()
