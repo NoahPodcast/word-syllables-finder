@@ -4,6 +4,43 @@
 
 This Python script is designed to read a dictionary file containing words and search for words that contain a specified sequence of syllables, subject to a length constraint. The script can be configured to use different dictionaries based on language selection.
 
+## How to run the script
+### Linux (Using `apt`, `apk` or `yum`)
+1. Open Terminal.
+2. Update the package list with the command:
+
+    ```bash
+    sudo apt update
+    ```
+3. Install Python by running:
+    ```bash
+    sudo apt install python3
+    ```
+
+### macOS (Using `brew`)
+1. Open Terminal.
+2. If you don't already have Homebrew installed, you can do so by running:
+    ```bash
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+3. Install Python with Homebrew using:
+
+    ```bash
+    brew install python
+    ```
+
+### Windows
+For Windows, Python can be installed by downloading the installer from [the official Python website](https://www.python.org/downloads/) <u>**and download at worst the version 3**</u> or through the Microsoft Store by searching for "Python".
+
+After installing Python, you can run the script by navigating in Terminal or Command Prompt to the directory containing the script and using the command <u>**on Windows.**</u>
+```bash
+python word-syllables-finder.py
+```
+or <u>**on Linux and macOS.**</u>
+
+```bash
+python3 word-syllables-finder.py
+```
 ## Script Overview
 
 1. **Read Dictionary File**: Reads words from a dictionary file and creates a mapping of words to the file path.
